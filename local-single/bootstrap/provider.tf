@@ -28,7 +28,7 @@ provider "kubernetes" {
 }
 
 provider "vault" {
-  address = "http://vault.single-node.test"
+  address = local.vault_address
   token = var.vault_token
-  skip_tls_verify = true
+  skip_tls_verify = local.skip_vault_tls
 }

@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "terraform-state"
     endpoints = {
-      s3 = "http://minio.single-node.test"
+      s3 = "https://minio.single-node.test"
     }
     key = "base.tfstate"
     
