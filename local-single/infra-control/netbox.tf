@@ -21,14 +21,14 @@ module "netbox-db-user-secret" {
   ]
 }
 
-module "netbox-db-user-secret" {
+module "netbox-admin-user-secret" {
   source = "../../terraform-modules/kube_external_secret"
 
   secret_name = "netbox-admin-user"
   secret_namespace = local.secret_namespace
   refresh_interval = local.refresh_interval
   secret_store_name = local.secret_store_name
-  secret_store_type = local.secret.store.type
+  secret_store_type = local.secret_store_type
   vault_key = "/secrets/data/infra/netbox/admin-user"
 
   secret_props = [
@@ -43,6 +43,24 @@ module "netbox-db-user-secret" {
     {
       secret_key = "email"
       property = "email"
+    }
+  ]
+}
+
+module "netbox-secret-key" {
+  source = "../../terraform-modules/kube_external_secret"
+
+  secret_name = "netbox-secret-key"
+  secret_namespace = local.secret_namespace
+  refresh_interval = local.refresh_interval
+  secret_store_name = local.secret_store_name
+  secret_store_type = local.secret_store_type
+  vault_key = "/secrets/data/infra/netbox/secret-key"
+
+  secret_props = [
+    {
+      secret_key = "secretKey"
+      property = "secretKey"
     }
   ]
 }
